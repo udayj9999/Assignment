@@ -17,7 +17,7 @@ public class Inventory {
         int id;
         String name;
         int price;
-        int quantity;
+        int pquantity;
         PreparedStatement preparedStatement = null;
         switch (user) {
             case "shopkeeper":
@@ -34,14 +34,15 @@ public class Inventory {
                         name = sc.next();
                         System.out.println("Enter price of product");
                         price = sc.nextInt();
-                        System.out.println("Enter price of product");
-                        quantity = sc.nextInt();
-                        String insert = "insert into product(id,name,price) values(?,?,?)";
+                        System.out.println("Enter pquantity ");
+                        pquantity = sc.nextInt();
+                        String insert = "insert into product(id,name,price,pquantity) values(?,?,?,?)";
                         preparedStatement = connection.prepareStatement(insert);
                         preparedStatement.setInt(1, id);
                         preparedStatement.setString(2, name);
                         preparedStatement.setInt(3, price);
-                        preparedStatement.setInt(4, quantity);
+                        preparedStatement.setInt(4, pquantity);
+
 
                         int i = preparedStatement.executeUpdate();
                         System.out.println(i + " record added ..");
@@ -79,14 +80,14 @@ public class Inventory {
                         System.out.println("Enter price of product");
                         price = sc3.nextInt();
                         System.out.println("Enter quantity of product");
-                        quantity = sc3.nextInt();
+                        pquantity = sc3.nextInt();
 
                         String edit = "update product set id = ?,name =? ,price =? ,quantity = ? where id = " + eId;
                         preparedStatement = connection.prepareStatement(edit);
                         preparedStatement.setInt(1, eId);
                         preparedStatement.setString(2, name);
                         preparedStatement.setInt(3, price);
-                        preparedStatement.setInt(4, quantity);
+                        preparedStatement.setInt(4, pquantity);
                         int e = preparedStatement.executeUpdate();
                         System.out.println(e + " record edit");
 
@@ -161,7 +162,7 @@ public class Inventory {
                             System.out.println("Enter cvv");
                             cvv = sc5.nextInt();
 
-                            String buy = "insert into orders(id,name,creditcard,cvv,quntity) values(?,?,?,?,?)";
+                            String buy = "insert into orders(id,name,creditcard,cvv,quantity) values(?,?,?,?,?)";
                             preparedStatement = connection.prepareStatement(buy);
                             preparedStatement.setInt(1, productId);
                             preparedStatement.setString(2, cName);
